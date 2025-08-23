@@ -1,28 +1,26 @@
-# Use OpenJDK 17 as base image
-FROM openjdk:17-jdk-slim
-
-# Set working directory
+# ---- BUILD STAGE ----
+FROM maven:3.9-eclipse-temurin-17 AS build
 WORKDIR /app
 
-# Copy Maven wrapper and pom.xml
-COPY mvnw .
-COPY .mvn .mvn
+# Copy pom.xml and download dependencies first (for caching)
 COPY pom.xml .
+RUN mvn -q -e -DskipTests dependency:go-offline
 
-# Make Maven wrapper executable
-RUN chmod +x ./mvnw
-
-# Download dependencies
-RUN ./mvnw dependency:go-offline -B
-
-# Copy source code
+# Copy the full source and build the project
 COPY src ./src
+RUN mvn -q -DskipTests clean package
 
-# Build the application
-RUN ./mvnw clean package -DskipTests
+# ---- RUN STAGE ----
+FROM eclipse-temurin:17-jre-jammy
+WORKDIR /app
 
-# Expose port
-EXPOSE 9090
+# Copy built jar from build stage
+COPY --from=build /app/target/ecommerce-0.0.1-SNAPSHOT.jar app.jar
 
-# Run the application
-CMD ["java", "-jar", "target/ecommerce-0.0.1-SNAPSHOT.jar"]
+# Use Render’s PORT
+ENV PORT=8080
+EXPOSE 8080
+
+# Run the app
+CMD ["sh", "-c", "java -Dserver.port=$PORT -jar app.jar"]
+
