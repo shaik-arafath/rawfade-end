@@ -22,9 +22,49 @@
                 --accent: #ffffff;
                 --border: #333333;
             }
-                         body { background: #000000; color: #ffffff; overflow-x: hidden; }
-      
-            
+            body { background: #000000; color: #ffffff; overflow-x: hidden; }
+
+            /* Header */
+            #header { 
+                background: var(--panel); 
+                border-bottom: 1px solid rgba(255,255,255,0.1); 
+                position: sticky; 
+                top: 0; 
+                z-index: 999; 
+                padding: 0 32px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 80px;
+                overflow: hidden;
+            }
+
+            .logo-container {
+                flex: 0 0 auto;
+                margin-right: 15px;
+                display: flex;
+                align-items: center;
+                padding: 0;
+                height: 100%;
+                overflow: hidden;
+            }
+
+            .logo-container img {
+                height: 100%;
+                width: auto;
+                max-height: 150px;
+                display: block;
+                margin: 0;
+                padding: 0;
+                transform: none;
+            }
+
+            #header nav {
+                flex: 1;
+                display: flex;
+                justify-content: center;
+            }
+
             #navbar { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; }
             #navbar li { list-style: none; position: relative; }
             #navbar li a { text-decoration: none; font-size: 15px; font-weight: 600; color: var(--text); transition: .2s ease; padding: 8px 16px; border-radius: 20px; display: block; }
@@ -447,6 +487,45 @@
                 font-size: 18px;
             }
             
+            /* Footer logo container */
+            .footer-logo-container {
+                display: flex;
+                align-items: center;
+                margin-bottom: 15px;
+            }
+
+            .footer-logo-container img {
+                margin-right: 10px;
+            }
+
+            .footer-logo-container .brand-name {
+                font-size: 18px;
+                margin: 0;
+            }
+
+            /* Responsive design for footer logos */
+            @media (max-width: 768px) {
+                .footer-logo-container img {
+                    max-width: 60px;
+                }
+                
+                .footer-logo-container .brand-name {
+                    font-size: 16px;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .footer-logo-container {
+                    flex-direction: column;
+                    align-items: flex-start;
+                }
+                
+                .footer-logo-container img {
+                    margin-bottom: 5px;
+                    max-width: 50px;
+                }
+            }
+            
             /* Pagination Black and White */
             #pagination {
                 background: #000000;
@@ -637,7 +716,7 @@
     <body>
         <section id="header">
             <div class="logo-container">
-                <a href="#"><img src="img/RAW FADE Logo Design.png" class="logo" alt="RAW FADE"></a>
+                <a href="#"><img src="img/logo1.png" class="logo" alt="RAW FADE"></a>
             </div>
             <nav>
                 <ul id="navbar">
@@ -989,7 +1068,9 @@
         
         <footer class="section-p1">
             <div class="col">
-                <img src="img/RAW FADE Logo Design.png" alt="RAW FADE">
+                <div class="footer-logo-container">
+                    <img class="logo" src="img/logo1.png" alt="RAW FADE" style="max-width: 150px;">
+                </div>
                 <h4>Contact</h4>
                 <p><strong>Address:</strong> Proddatur City in Andhra Pradesh, India</p>
                 <p><strong>Phone:</strong> +01 2222 3653</p> 
@@ -1162,35 +1243,5 @@
             checkAuthStatus();
         </script>
 
-        <section id="newsletter" class="section-p1 section-m1">
-            <div class="newstext">
-                <h4>Sign Up For Newsletter</h4>
-                <p>Get E-mail updates about our latest shop and special offers</p>
-            </div>
-            <div class="newsletter-form">
-                <input type="email" placeholder="Your email address">
-                <button>Sign Up</button>
-            </div>
-        </section>
-
-        <footer class="section-p1">
-            <div class="col">
-                <div class="footer-logo-container">
-                    <img class="logo" src="img/logo1.png" alt="RAW FADE" style="max-width: 150px;">
-                </div>
-                <h4>Contact</h4>
-                <p><strong>Address:</strong>Proddatur City in Andhra Pradesh, India</p>
-                <p><strong>Phone:</strong>+91 7777911229</p>
-                <p><strong>Hours:</strong> 10:00 - 18:00, Mon - Sat</p>
-                <div class="follow">
-                    <h4>Follow us</h4>
-                    <div class="icon">
-                        <i class="fab fa-facebook-f"></i>
-                        <i class="fab fa-twitter"></i>
-                        <i class="fab fa-instagram"></i>
-                        <i class="fab fa-pinterest-p"></i>
-                        <i class="fab fa-youtube"></i>
-                    </div>
-                </div>
-
-```
+    </body>
+</html>
